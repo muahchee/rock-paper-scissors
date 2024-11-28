@@ -90,7 +90,7 @@ let computerScore = 0;
 
 
 let winText = "You win! The robot beeps in discontent. One point to you."
-let loseText = "You lose! The does a little spin. One point to the robot!"
+let loseText = "You lose! The robot does a little spin. One point to the robot!"
 
 function playRound(humanChoice, computerChoice){
     if (humanChoice === computerChoice){
@@ -98,30 +98,45 @@ function playRound(humanChoice, computerChoice){
     } else if(humanChoice === "Scissors" && computerChoice === "Rock"){
         ++computerScore;
         console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     } else if(humanChoice === "Scissors" && computerChoice === "Paper"){
         ++humanScore;
         console.log(winText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     } else if(humanChoice === "Rock" && computerChoice === "Paper"){
         ++computerScore;
         console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     } else if(humanChoice === "Rock" && computerChoice === "Scissors"){
         ++humanScore;
         console.log(winText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     } else if(humanChoice === "Paper" && computerChoice === "Scissors"){
         ++computerScore;
         console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     } else if(humanChoice === "Paper" && computerChoice === "Rock"){
         ++humanScore;
         console.log(winText);
-        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
     }
 }
 
-getHumanChoice();
-getComputerChoice();
-playRound(humanChoice,computerChoice);
+// create a variable called roundCount
+// create function called playGame
+//     loop (roundCOunt starts at 1 )
+//         get HumanChoice then get ComputerChoice
+//         play a round
+//         add 1 to roundCount
+//         repeat loop until roundCount reaches 5
+
+function playGame(){
+    for (let roundCount = 1; roundCount <= 5; ++roundCount){
+        console.log(`Round ${roundCount}!`)
+        getHumanChoice();
+        getComputerChoice();
+        playRound(humanChoice,computerChoice);
+    }
+}
+
+playGame();
