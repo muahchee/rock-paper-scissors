@@ -30,8 +30,6 @@ function getComputerChoice(){
     }
 }
 
-getComputerChoice();
-
 // Create variable called humanChoice
 
 // Create function called getHumanChoice
@@ -61,11 +59,69 @@ function getHumanChoice(){
         getHumanChoice();
     }
 }
-
-getHumanChoice();
     
 // create a variable called humanScore and set it to 0
 // create a variable called computerScore and set it to 0
 
 let humanScore = 0;
 let computerScore = 0;
+
+// invoke getHumanChoice
+// invoke getComputerChoice
+// create winText and loseText variables so I dont have to keep writing it
+// create a function called playRound
+// define two parameters for playRound - humanChoice and computerChoice
+
+// if humanChoice equals computerChoice, print "It's a draw!"
+
+// if humanChoice equals computerChoice, print "It's a draw!"
+
+// if humanChoice is Scissors and computerChoice is Rock, add 1 to computerScore and print loseText
+
+// if humanChoice is Scissors and computerChoice is Paper, add 1 to humanScore and print winText
+
+// if humanChoice is Rock and computerChoice is Paper, add 1 to computerScore and print loseText
+
+// if humanChoice is Rock and computerChoice is Scissors, add 1 to humanScore and print winText
+
+// if humanChoice is Paper and computerChoice is Scissors, add 1 to computerScore and print loseText
+
+// if humanChoice is Paper and computerChoice is Paper, add 1 to humanScore and print winText
+
+
+let winText = "You win! The robot beeps in discontent. One point to you."
+let loseText = "You lose! The does a little spin. One point to the robot!"
+
+function playRound(humanChoice, computerChoice){
+    if (humanChoice === computerChoice){
+        console.log("It's a draw! The robot returns to starting position.")
+    } else if(humanChoice === "Scissors" && computerChoice === "Rock"){
+        ++computerScore;
+        console.log(loseText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    } else if(humanChoice === "Scissors" && computerChoice === "Paper"){
+        ++humanScore;
+        console.log(winText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    } else if(humanChoice === "Rock" && computerChoice === "Paper"){
+        ++computerScore;
+        console.log(loseText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    } else if(humanChoice === "Rock" && computerChoice === "Scissors"){
+        ++humanScore;
+        console.log(winText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    } else if(humanChoice === "Paper" && computerChoice === "Scissors"){
+        ++computerScore;
+        console.log(loseText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    } else if(humanChoice === "Paper" && computerChoice === "Rock"){
+        ++humanScore;
+        console.log(winText);
+        console.log(`Player currently has ${humanScore} | Computer currently has ${computerScore}`);
+    }
+}
+
+getHumanChoice();
+getComputerChoice();
+playRound(humanChoice,computerChoice);
