@@ -27,6 +27,7 @@ function chooseRock(){
     humanChoice = "Rock";
     getComputerChoice();
     playRound(humanChoice,computerChoice);
+    winGame();
     
 }
 
@@ -37,6 +38,7 @@ function choosePaper(){
     humanChoice = "Paper";
     getComputerChoice();
     playRound(humanChoice,computerChoice);
+    winGame();
 }
 
 function chooseScissors(){
@@ -46,6 +48,7 @@ function chooseScissors(){
     humanChoice = "Scissors";
     getComputerChoice();
     playRound(humanChoice,computerChoice);
+    winGame();
 }
 
 let computerChoice;
@@ -76,29 +79,27 @@ let humanScore = 0;
 let computerScore = 0;
 
 
-let winText = "You win! The robot beeps in discontent. One point to you."
-let loseText = "You lose! The robot does a little spin. One point to the robot!"
-
 function loseRound(){
     ++computerScore;
-    let log = document.createElement("p");
-    log.textContent = loseText;
+    const log = document.createElement("p");
+    log.textContent = "You lose! The robot does a little spin. One point to the robot!";
     gameLog.insertBefore(log, gameLog.childNodes[0]);
-    let score = document.createElement("p");
+    const score = document.createElement("p");
     score.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     gameLog.insertBefore(score, gameLog.childNodes[0]);
 }
 
 function winRound(){
     ++humanScore;
-    let log = document.createElement("p");
-    log.textContent = winText;
+    const log = document.createElement("p");
+    log.textContent = "You win! The robot beeps in discontent. One point to you.";
     gameLog.insertBefore(log, gameLog.childNodes[0]);
-    let score = document.createElement("p");
+    const score = document.createElement("p");
     score.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     gameLog.insertBefore(score, gameLog.childNodes[0]);
 }
 
+//combinations of choice
 function playRound(humanChoice, computerChoice){
     if (humanChoice === computerChoice){
         const log = document.createElement("p");
@@ -119,8 +120,21 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
+//announce winner and resets score
 function winGame(){
-    if (humanScore === 5 || )
+    if (humanScore === 5){
+        const log = document.createElement("p");
+        log.textContent = "Aaaandddd STOP! The winner is...PLAYER!!";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
+        humanScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 5){
+        const log = document.createElement("p");
+        log.textContent = "Aaaandddd STOP! The winner is...ROBOT!!";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
+        humanScore = 0;
+        computerScore = 0;
+    }
 }
 
 rockBtn.addEventListener('click', chooseRock);
