@@ -1,38 +1,74 @@
-//Randomly choose between rock paper scissors for computer choice
-let computerChoice;
 
+const rockBtn = document.createElement('button');
+const paperBtn = document.createElement('button');
+const scissorsBtn = document.createElement('button');
+
+const gameLog = document.createElement('div');
+
+rockBtn.textContent = "Rock!";
+paperBtn.textContent = "Paper!";
+scissorsBtn.textContent = "Scissors!";
+
+const btnContainer = document.createElement('div');
+
+btnContainer.appendChild(rockBtn);
+btnContainer.appendChild(paperBtn);
+btnContainer.appendChild(scissorsBtn);
+document.body.appendChild(btnContainer);
+document.body.appendChild(gameLog);
+
+
+let humanChoice;
+
+function chooseRock(){
+    const log = document.createElement("p");
+    log.textContent = "You choose Rock!";
+    gameLog.insertBefore(log, gameLog.childNodes[0]);
+    humanChoice = "Rock";
+    getComputerChoice();
+    
+}
+
+function choosePaper(){
+    const log = document.createElement("p");
+    log.textContent = "You choose Paper!";
+    gameLog.insertBefore(log, gameLog.childNodes[0]);
+    humanChoice = "Paper";
+    getComputerChoice();
+}
+
+function chooseScissors(){
+    const log = document.createElement("p");
+    log.textContent = "You choose Scissors!";
+    gameLog.insertBefore(log, gameLog.childNodes[0]);
+    humanChoice = "Scissors";
+    getComputerChoice();
+}
+
+let computerChoice;
+//Randomly choose between rock paper scissors for computer choice
 function getComputerChoice(){
     let randomChoiceNumber;
     randomChoiceNumber = Math.floor(Math.random() * 3)
     
     if (randomChoiceNumber === 0){
+        const log = document.createElement("p");
+        log.textContent = "Rock! The robot holds out a pretty round pebble from it's collection.";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
         computerChoice = "Rock";
-        console.log("Rock! The robot holds out a pretty round pebble from it's collection.")
     }else if (randomChoiceNumber === 1){
+        const log = document.createElement("p");
+        log.textContent = "Paper! The robot prints an A4 sheet from it's mouth while looking you in the eyes.";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
         computerChoice = "Paper";
-        console.log("Paper! The robot prints an A4 sheet from it's mouth while looking you in the eyes.")
     }else{
+        const log = document.createElement("p");
+        log.textContent = "Scissors! The robot shoves its C-shaped grippy hand at you.";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
         computerChoice = "Scissors";
-        console.log("Scissors! The robot shoves its C-shaped grippy hand at you.")
     }
 }
 
-
-let humanChoice;
-//human choice depends on button press
-function getHumanChoice(humanChoice){
-
-    if (humanChoice === "Rock"){
-        console.log("You choose Rock!");
-    }else if(humanChoice === "Paper"){
-        console.log("You choose Paper!");
-    }else if(humanChoice === "Scissors"){
-        console.log ("You choose Scissors!")
-    }else{
-        console.log("That's not a valid choice! ...or maybe you spelt it wrong. Either way, please just type Rock, Paper or Scissors.")
-        getHumanChoice();
-    }
-}
 
 
 let humanScore = 0;
@@ -44,57 +80,45 @@ let loseText = "You lose! The robot does a little spin. One point to the robot!"
 
 function playRound(humanChoice, computerChoice){
     if (humanChoice === computerChoice){
-        console.log("It's a draw! The robot returns to starting position.")
+        gameLog.textContent ="It's a draw! The robot returns to starting position."
     } else if(humanChoice === "Scissors" && computerChoice === "Rock"){
         ++computerScore;
-        console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = loseText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     } else if(humanChoice === "Scissors" && computerChoice === "Paper"){
         ++humanScore;
-        console.log(winText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = winText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     } else if(humanChoice === "Rock" && computerChoice === "Paper"){
         ++computerScore;
-        console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = loseText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     } else if(humanChoice === "Rock" && computerChoice === "Scissors"){
         ++humanScore;
-        console.log(winText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = winText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     } else if(humanChoice === "Paper" && computerChoice === "Scissors"){
         ++computerScore;
-        console.log(loseText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = loseText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     } else if(humanChoice === "Paper" && computerChoice === "Rock"){
         ++humanScore;
-        console.log(winText);
-        console.log(`Player currently has ${humanScore} | Robot currently has ${computerScore}`);
+        gameLog.textContent = winText;
+        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
     }
 }
 
-function playGame(humanChoice){
+function playGame(){
     for (let roundCount = 1; ; ++roundCount){
-        console.log(`Round ${roundCount}!`)
+        gameLog.textContent =`Round ${roundCount}!`;
         getHumanChoice(humanChoice);
         getComputerChoice();
         playRound(humanChoice,computerChoice);
     }
 }
 
-const rockBtn = document.createElement('button');
-const paperBtn = document.createElement('button');
-const scissorsBtn = document.createElement('button');
-
-rockBtn.addEventListener("click", playGame('Rock'));
-paperBtn.addEventListener("click", playGame('Paper'));
-scissorsBtn.addEventListener("click", playGame('Scissors'));
-
-const btnContainer = document.createElement('div');
-
-btnContainer.appendChild(rockBtn);
-btnContainer.appendChild(paperBtn);
-btnContainer.appendChild(scissorsBtn);
-
-
+rockBtn.addEventListener('click', chooseRock);
+paperBtn.addEventListener('click', choosePaper);
+scissorsBtn.addEventListener('click', chooseScissors);
 
 
