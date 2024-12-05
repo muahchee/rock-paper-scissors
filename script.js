@@ -26,6 +26,7 @@ function chooseRock(){
     gameLog.insertBefore(log, gameLog.childNodes[0]);
     humanChoice = "Rock";
     getComputerChoice();
+    playRound(humanChoice,computerChoice);
     
 }
 
@@ -35,6 +36,7 @@ function choosePaper(){
     gameLog.insertBefore(log, gameLog.childNodes[0]);
     humanChoice = "Paper";
     getComputerChoice();
+    playRound(humanChoice,computerChoice);
 }
 
 function chooseScissors(){
@@ -43,6 +45,7 @@ function chooseScissors(){
     gameLog.insertBefore(log, gameLog.childNodes[0]);
     humanChoice = "Scissors";
     getComputerChoice();
+    playRound(humanChoice,computerChoice);
 }
 
 let computerChoice;
@@ -69,8 +72,6 @@ function getComputerChoice(){
     }
 }
 
-
-
 let humanScore = 0;
 let computerScore = 0;
 
@@ -78,43 +79,48 @@ let computerScore = 0;
 let winText = "You win! The robot beeps in discontent. One point to you."
 let loseText = "You lose! The robot does a little spin. One point to the robot!"
 
+function loseRound(){
+    ++computerScore;
+    let log = document.createElement("p");
+    log.textContent = loseText;
+    gameLog.insertBefore(log, gameLog.childNodes[0]);
+    let score = document.createElement("p");
+    score.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+    gameLog.insertBefore(score, gameLog.childNodes[0]);
+}
+
+function winRound(){
+    ++humanScore;
+    let log = document.createElement("p");
+    log.textContent = winText;
+    gameLog.insertBefore(log, gameLog.childNodes[0]);
+    let score = document.createElement("p");
+    score.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+    gameLog.insertBefore(score, gameLog.childNodes[0]);
+}
+
 function playRound(humanChoice, computerChoice){
     if (humanChoice === computerChoice){
-        gameLog.textContent ="It's a draw! The robot returns to starting position."
+        const log = document.createElement("p");
+        log.textContent ="It's a draw! The robot returns to starting position.";
+        gameLog.insertBefore(log, gameLog.childNodes[0]);
     } else if(humanChoice === "Scissors" && computerChoice === "Rock"){
-        ++computerScore;
-        gameLog.textContent = loseText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        loseRound();
     } else if(humanChoice === "Scissors" && computerChoice === "Paper"){
-        ++humanScore;
-        gameLog.textContent = winText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        winRound();
     } else if(humanChoice === "Rock" && computerChoice === "Paper"){
-        ++computerScore;
-        gameLog.textContent = loseText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        loseRound();
     } else if(humanChoice === "Rock" && computerChoice === "Scissors"){
-        ++humanScore;
-        gameLog.textContent = winText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        winRound();
     } else if(humanChoice === "Paper" && computerChoice === "Scissors"){
-        ++computerScore;
-        gameLog.textContent = loseText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        loseRound();
     } else if(humanChoice === "Paper" && computerChoice === "Rock"){
-        ++humanScore;
-        gameLog.textContent = winText;
-        gameLog.textContent = `Player currently has ${humanScore} | Robot currently has ${computerScore}`;
+        winRound();
     }
 }
 
-function playGame(){
-    for (let roundCount = 1; ; ++roundCount){
-        gameLog.textContent =`Round ${roundCount}!`;
-        getHumanChoice(humanChoice);
-        getComputerChoice();
-        playRound(humanChoice,computerChoice);
-    }
+function winGame(){
+    if (humanScore === 5 || )
 }
 
 rockBtn.addEventListener('click', chooseRock);
