@@ -1,17 +1,4 @@
-// create variable called ComputerChoice
-
-// create function called getComputerChoice
-
-//     create a variable called randomChoiceNumber 
-//     generate number between 0 to 2 and store output in randomChoiceNumber
-
-//     If randomChoiceNumber is 0, store "Rock" in ComputerChoice and print "Rock" into console
-
-//     Else if ComputerChoice is 1, store "Paper" in ComputerChoice and print "Paper" into console
-
-//     Else store "Scissors" in ComputerChoice and print "Scissors" into console
-
-
+//Randomly choose between rock paper scissors for computer choice
 let computerChoice;
 
 function getComputerChoice(){
@@ -30,63 +17,26 @@ function getComputerChoice(){
     }
 }
 
-// Create variable called humanChoice
-
-// Create function called getHumanChoice
-
-//     prompt player to write their choice and store in humanChoice
-//     In humanChoice, capitalise the first letter and make the rest lower case
-
-//     If humanChoice equals "Rock", print "Rock" in console,
-//     Else if humanChoice equals "Paper", print "Paper" in console,
-//     Else if humanChoice equals "Scissors", print "Scissors" in console,
-//     Else print "That's not a valid choice! ...or maybe you spelt it wrong. Either way, please type Rock, Paper or Scissors." in console. Allow player to re-enter choice.
 
 let humanChoice;
-
-function getHumanChoice(){
-    humanChoice = prompt("Rock, Paper or Scissors?");
-    humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+//human choice depends on button press
+function getHumanChoice(humanChoice){
 
     if (humanChoice === "Rock"){
         console.log("You choose Rock!");
     }else if(humanChoice === "Paper"){
         console.log("You choose Paper!");
     }else if(humanChoice === "Scissors"){
-        console.log("You choose Scissors!")
+        console.log ("You choose Scissors!")
     }else{
         console.log("That's not a valid choice! ...or maybe you spelt it wrong. Either way, please just type Rock, Paper or Scissors.")
         getHumanChoice();
     }
 }
-    
-// create a variable called humanScore and set it to 0
-// create a variable called computerScore and set it to 0
+
 
 let humanScore = 0;
 let computerScore = 0;
-
-// invoke getHumanChoice
-// invoke getComputerChoice
-// create winText and loseText variables so I dont have to keep writing it
-// create a function called playRound
-// define two parameters for playRound - humanChoice and computerChoice
-
-// if humanChoice equals computerChoice, print "It's a draw!"
-
-// if humanChoice equals computerChoice, print "It's a draw!"
-
-// if humanChoice is Scissors and computerChoice is Rock, add 1 to computerScore and print loseText
-
-// if humanChoice is Scissors and computerChoice is Paper, add 1 to humanScore and print winText
-
-// if humanChoice is Rock and computerChoice is Paper, add 1 to computerScore and print loseText
-
-// if humanChoice is Rock and computerChoice is Scissors, add 1 to humanScore and print winText
-
-// if humanChoice is Paper and computerChoice is Scissors, add 1 to computerScore and print loseText
-
-// if humanChoice is Paper and computerChoice is Paper, add 1 to humanScore and print winText
 
 
 let winText = "You win! The robot beeps in discontent. One point to you."
@@ -122,21 +72,29 @@ function playRound(humanChoice, computerChoice){
     }
 }
 
-// create a variable called roundCount
-// create function called playGame
-//     loop (roundCOunt starts at 1 )
-//         get HumanChoice then get ComputerChoice
-//         play a round
-//         add 1 to roundCount
-//         repeat loop until roundCount reaches 5
-
-function playGame(){
-    for (let roundCount = 1; roundCount <= 5; ++roundCount){
+function playGame(humanChoice){
+    for (let roundCount = 1; ; ++roundCount){
         console.log(`Round ${roundCount}!`)
-        getHumanChoice();
+        getHumanChoice(humanChoice);
         getComputerChoice();
         playRound(humanChoice,computerChoice);
     }
 }
 
-playGame();
+const rockBtn = document.createElement('button');
+const paperBtn = document.createElement('button');
+const scissorsBtn = document.createElement('button');
+
+rockBtn.addEventListener("click", playGame('Rock'));
+paperBtn.addEventListener("click", playGame('Paper'));
+scissorsBtn.addEventListener("click", playGame('Scissors'));
+
+const btnContainer = document.createElement('div');
+
+btnContainer.appendChild(rockBtn);
+btnContainer.appendChild(paperBtn);
+btnContainer.appendChild(scissorsBtn);
+
+
+
+
